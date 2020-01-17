@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">NasaApiAndroid</string>
+    <string name="app_name">Nasa Image Browser</string>
 
     <string name="search_edittext_hint">What do you want to search?</string>
     <string name="search_button_text">Start exploring the space!</string>
+    <string name="results_of_search">Results for the search:</string>
 </resources>

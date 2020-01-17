@@ -27,6 +27,9 @@ class RecyclerViewActivity : AppCompatActivity() {
         //Receive the freeSearch variable from MainActivity
         val freeSearch = intent.getStringExtra("FreeSearch")
 
+        textSearchResult.text =
+            """${getString(R.string.results_of_search)} $freeSearch"""
+
         //Adapter
         myAdapter = MyAdapter(itemList)
 
