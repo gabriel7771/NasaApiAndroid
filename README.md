@@ -5,5 +5,5 @@ Android app that allows to search oficial images from the Nasa, using the Nasa I
 # 1/16/2020
 Added search functionality and api connection
 
-<image src="images/day1_mainactivity.jpeg" width=100>
+<image src="images/day1_mainactivity.jpeg" width=250>
 
