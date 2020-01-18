@@ -1,10 +1,13 @@
 package com.jgba.nasaapiandroid
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.jgba.nasaapiandroid.model.Item
 import com.squareup.picasso.Picasso
@@ -58,7 +61,7 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
     }
 }
 //Adapter for RecyclerViewHistoryActivity which contains the searches history
-class HistoryAdapter(context: Context, val history: ArrayList<History>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
+class HistoryAdapter(context: Context, val historyList: ArrayList<History>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
 
     val context = context
 
@@ -74,13 +77,35 @@ class HistoryAdapter(context: Context, val history: ArrayList<History>): Recycle
     }
 
     override fun getItemCount(): Int {
-         return history.size
+         return historyList.size
     }
 
     override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
-        val history: History = history[position]
+        val history: History = historyList[position]
         holder.searchedText.text = history.historySearch
         holder.dateText.text = history.historyDate
+
+        holder.btnDelete.setOnClickListener {
+             val historySearch = history.historySearch
+
+            var alertDialog = AlertDialog.Builder(context)
+                .setTitle("Warning")
+                .setMessage("Do you want to delete ${history.historySearch} from the history?")
+                .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                    if (RecyclerViewHistoryActivity.dbHandler.deleteHistory(history.historyID)){
+                        historyList.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, historyList.size)
+                        Toast.makeText(context, "$historySearch " + context.getString(R.string.deleted),Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(context, context.getString(R.string.error_deleting),Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->  })
+                .setIcon(R.drawable.ic_warning_red_24dp)
+                .show()
+        }
 
     }
 }

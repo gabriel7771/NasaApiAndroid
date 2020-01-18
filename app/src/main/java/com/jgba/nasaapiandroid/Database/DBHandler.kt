@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import android.webkit.WebHistoryItem
 import android.widget.Toast
 import com.jgba.nasaapiandroid.History
 import com.jgba.nasaapiandroid.R
@@ -48,6 +50,7 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
                 history.historySearch = cursor.getString(cursor.getColumnIndex(COLUMN_HISTORY_SEARCH))
                 history.historyDate = cursor.getString(cursor.getColumnIndex(COLUMN_HISTORY_DATE))
                 historyList.add(history)
+                historyList.reverse() //Used reverse method to show history from first to last search
             }
         }
         cursor.close()
@@ -66,5 +69,20 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
         }
         db.close()
+    }
+    //Delete history from database
+    fun deleteHistory(historyID: Int): Boolean {
+        val query = "Delete From $HISTORY_TABLE_NAME where $COLUMN_HISTORY_ID = $historyID"
+        val db: SQLiteDatabase = this.writableDatabase
+        var successDelete: Boolean = false
+        try{
+            val cursor: Unit = db.execSQL(query)
+            successDelete = true
+        }
+        catch (e: Exception){
+            Log.e(ContentValues.TAG, e.toString())
+        }
+        db.close()
+        return successDelete
     }
 }
