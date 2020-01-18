@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ItemDetailsActivity"></activity>
+        <activity android:name=".RecyclerViewHistoryActivity"></activity>
+        <activity android:name=".ItemDetailsActivity" />
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

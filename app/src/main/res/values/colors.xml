@@ -6,4 +6,7 @@
 
     <color name="blue_dark">#00004C</color>
     <color name="gray_light">#CCCCFF</color>
+    <color name="gray_normal">#EEEEEE</color>
+    <color name="purple_light">#AAAAFF</color>
+
 </resources>

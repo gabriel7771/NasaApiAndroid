@@ -4,4 +4,9 @@
     <string name="search_edittext_hint">What do you want to search?</string>
     <string name="search_button_text">Start exploring the space!</string>
     <string name="results_of_search">Results for the search:</string>
+    <string name="tap_for_details">Tap on one item to see details</string>
+    <string name="searched">Searched:</string>
+    <string name="date">Search date:</string>
+    <string name="no_searches_found">No searches found</string>
+    <string name="search_history">Search history</string>
 </resources>

@@ -18,7 +18,7 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     private val itemList: MutableList<Item> = mutableListOf()
 
-    private lateinit var myAdapter: MyAdapter
+    private lateinit var myAdapter: SearchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class RecyclerViewActivity : AppCompatActivity() {
             """${getString(R.string.results_of_search)} $freeSearch"""
 
         //Adapter
-        myAdapter = MyAdapter(itemList)
+        myAdapter = SearchAdapter(applicationContext,itemList)
 
         //Recyclerview
         recycler_view.layoutManager = LinearLayoutManager(this)
