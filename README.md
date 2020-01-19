@@ -21,6 +21,17 @@ Added details when tap on item.
 SQLite set to add a history.
 
 <image src="images/day2_history.jpeg" width=250>
+  
+# 1/18/2020
+History UI improved.
+
+<image src="images/day3_history.jpeg" width=250>
+
+Added delete by item and delete all in history.
+
+<image src="images/day3_deleteItemHistory.jpeg" width=250> <image src="images/day3_deleteAllHistory.jpeg" width=250>
+
+
 
 
 
