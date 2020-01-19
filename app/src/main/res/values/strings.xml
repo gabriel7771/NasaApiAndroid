@@ -13,4 +13,13 @@
     <string name="error_deleting">Error deleting</string>
     <string name="history">History</string>
     <string name="history_subtitle">Select item to search</string>
+    <string name="search_subtitle">Select item to see details</string>
+    <string name="unknown_creator">Unknown creator</string>
+    <string name="warning">Warning</string>
+    <string name="warning_text_1">Do you want to delete</string>
+    <string name="warning_text_2">from the history?</string>
+    <string name="warning_text_all">Do you want to delete all history searches?</string>
+    <string name="deleted_all">Deleted history</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

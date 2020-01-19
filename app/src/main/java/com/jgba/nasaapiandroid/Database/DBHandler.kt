@@ -85,4 +85,19 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
         db.close()
         return successDelete
     }
+    //Delete all history from database
+    fun deleteAllHistory(): Boolean{
+        val query = "Delete From $HISTORY_TABLE_NAME"
+        val db: SQLiteDatabase = this.writableDatabase
+        var successDelete = false
+        try{
+            val cursor: Unit = db.execSQL(query)
+            successDelete = true
+        }
+        catch (e: Exception){
+            Log.e(ContentValues.TAG, e.toString())
+        }
+        db.close()
+        return successDelete
+    }
 }

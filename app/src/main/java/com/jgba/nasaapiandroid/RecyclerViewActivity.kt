@@ -27,8 +27,14 @@ class RecyclerViewActivity : AppCompatActivity() {
         //Receive the freeSearch variable from MainActivity
         val freeSearch = intent.getStringExtra("FreeSearch")
 
-        textSearchResult.text =
-            """${getString(R.string.results_of_search)} $freeSearch"""
+        //textSearchResult.text =
+        //   """${getString(R.string.results_of_search)} $freeSearch"""
+
+        this.title = """${getString(R.string.results_of_search)} $freeSearch"""
+        val toolbar = findViewById(R.id.toolbar_search) as androidx.appcompat.widget.Toolbar?
+        setSupportActionBar(toolbar)
+        toolbar?.subtitle = getString(R.string.search_subtitle)
+
 
         //Adapter
         myAdapter = SearchAdapter(applicationContext,itemList)

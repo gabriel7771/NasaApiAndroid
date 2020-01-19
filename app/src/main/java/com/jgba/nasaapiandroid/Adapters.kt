@@ -36,7 +36,11 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
         val imageText = holder.itemView.image_text
         val nasaImage = holder.itemView.nasa_image
 
-        val secondaryCreator = "${item.data[0].secondaryCreator}"
+        var secondaryCreator = "${item.data[0].secondaryCreator}"
+        if (secondaryCreator == "null"){
+            secondaryCreator = context.getString(R.string.unknown_creator)
+        }
+
         val dateCreated = "${item.data[0].dateCreated}"
         val description = "${item.data[0].description}"
         val imageLink = "${item.links[0].href}"
@@ -89,9 +93,9 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
              val historySearch = history.historySearch
 
             var alertDialog = AlertDialog.Builder(context)
-                .setTitle("Warning")
-                .setMessage("Do you want to delete ${history.historySearch} from the history?")
-                .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                .setTitle(context.getString(R.string.warning))
+                .setMessage(context.getString(R.string.warning_text_1)+" ${history.historySearch} " + context.getString(R.string.warning_text_2))
+                .setPositiveButton(context.getString(R.string.yes), DialogInterface.OnClickListener { dialog, which ->
                     if (RecyclerViewHistoryActivity.dbHandler.deleteHistory(history.historyID)){
                         historyList.removeAt(position)
                         notifyItemRemoved(position)
@@ -102,7 +106,7 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
                         Toast.makeText(context, context.getString(R.string.error_deleting),Toast.LENGTH_SHORT).show()
                     }
                 })
-                .setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->  })
+                .setNegativeButton(context.getString(R.string.no), DialogInterface.OnClickListener { dialog, which ->  })
                 .setIcon(R.drawable.ic_warning_red_24dp)
                 .show()
         }

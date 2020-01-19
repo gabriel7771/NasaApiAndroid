@@ -8,5 +8,6 @@
     <color name="gray_light">#CCCCFF</color>
     <color name="gray_normal">#EEEEEE</color>
     <color name="purple_light">#AAAAFF</color>
-
+    <color name="purple_dark">#9932CC</color>
+    <color name="magenta_dark">#8B008B</color>
 </resources>
