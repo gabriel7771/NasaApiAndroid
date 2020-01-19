@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
             val history = History()
             history.historySearch = freeSearch
             history.historyDate = getCurrentDateTime().toString()
+
+            RecyclerViewHistoryActivity.dbHandler = DBHandler(this,null,null, 1)
+
             RecyclerViewHistoryActivity.dbHandler.addHistory(this,history)
 
             //Opening new activity
