@@ -7,6 +7,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.jgba.nasaapiandroid.model.Item
@@ -60,7 +61,6 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
             intent.putExtra("DateCreated",dateCreated)
             intent.putExtra("Description",description)
             context.startActivity(intent)
-
         }
     }
 }
@@ -68,6 +68,8 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
 class HistoryAdapter(context: Context, val historyList: ArrayList<History>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
 
     val context = context
+    //listHistoryFull copy values from historyList to filter
+    var listHistoryFull = ArrayList<History>(historyList)
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val searchedText = itemView.searchedText
@@ -92,7 +94,7 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
         holder.btnDelete.setOnClickListener {
              val historySearch = history.historySearch
 
-            var alertDialog = AlertDialog.Builder(context)
+            AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.warning))
                 .setMessage(context.getString(R.string.warning_text_1)+" ${history.historySearch} " + context.getString(R.string.warning_text_2))
                 .setPositiveButton(context.getString(R.string.yes), DialogInterface.OnClickListener { dialog, which ->
@@ -111,6 +113,45 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
                 .show()
         }
 
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, RecyclerViewActivity::class.java)
+            intent.putExtra("FreeSearch",history.historySearch)
+            context.startActivity(intent)
+        }
+    }
+
+    fun getFilter(): Filter {
+        return historyFilter
+    }
+    private val historyFilter = object : Filter() {
+        override fun performFiltering(charSequence: CharSequence?): Filter.FilterResults {
+            val filteredList = java.util.ArrayList<History>()
+
+            if (charSequence == null || charSequence.length == 0) {
+                filteredList.addAll(listHistoryFull)
+            }
+            else
+            {
+                val filterPattern = charSequence.toString().toLowerCase().trim { it <= ' ' }
+                for (item in listHistoryFull) {
+                    if (item.historySearch.toLowerCase().contains(filterPattern))
+                    {
+                        filteredList.add(item)
+                    }
+                }
+            }
+            val filterResults = Filter.FilterResults()
+            filterResults.values = filteredList
+
+            return filterResults
+        }
+
+        override fun publishResults(charSequence: CharSequence, filterResults: Filter.FilterResults)
+        {
+            historyList.clear()
+            historyList.addAll(filterResults.values as List<History>)
+            notifyDataSetChanged()
+        }
     }
 }
 
