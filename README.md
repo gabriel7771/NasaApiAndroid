@@ -30,6 +30,11 @@ History UI improved.
 Added delete by item and delete all in history.
 
 <image src="images/day3_deleteItemHistory.jpeg" width=250> <image src="images/day3_deleteAllHistory.jpeg" width=250>
+  
+# 1/19/2020
+Added search view and selectable items to history.
+
+<image src="images/day4_history.jpeg" width=250> <image src="images/day4_historySearch.jpeg" width=250>
 
 
 
