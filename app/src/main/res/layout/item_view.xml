@@ -19,5 +19,6 @@
         android:layout_weight="5"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
+        android:textIsSelectable="false"
         android:textSize="18sp"></TextView>
 </LinearLayout>

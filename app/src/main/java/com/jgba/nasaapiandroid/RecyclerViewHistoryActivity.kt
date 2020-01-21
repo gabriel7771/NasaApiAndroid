@@ -2,6 +2,7 @@ package com.jgba.nasaapiandroid
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jgba.nasaapiandroid.Database.DBHandler
 import kotlinx.android.synthetic.main.activity_recycler_view_history.*
 
@@ -21,6 +23,8 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
     companion object {
         lateinit var dbHandler: DBHandler
     }
+
+    lateinit var bottomNavigationView: BottomNavigationView
 
     var historyList = ArrayList<History>()
     lateinit var adapter: HistoryAdapter
@@ -34,6 +38,26 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
         val toolbar = findViewById(R.id.toolbar_history) as androidx.appcompat.widget.Toolbar?
         setSupportActionBar(toolbar)
         toolbar?.subtitle = getString(R.string.history_subtitle)
+
+        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        setIconChecked()
+
+        bottomNavigationView.setOnNavigationItemSelectedListener {item ->
+            when (item.itemId){
+                R.id.searchNav -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    false }
+                R.id.favouritesNav -> {
+                    false
+                }
+                R.id.historyNav -> {
+                    false
+                }
+                else -> false
+            }
+            true
+        }
 
         dbHandler = DBHandler(this,null,null, 1)
 
@@ -85,6 +109,7 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
 
     override fun onResume() {
         viewHistory()
+        setIconChecked()
         super.onResume()
     }
 
@@ -109,5 +134,10 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
             .setNegativeButton(context.getString(R.string.no), DialogInterface.OnClickListener { dialog, which ->  })
             .setIcon(R.drawable.ic_warning_red_24dp)
             .show()
+    }
+    private fun setIconChecked(){
+        val menu: Menu = bottomNavigationView.menu
+        val menuItem: MenuItem = menu.getItem(2)
+        menuItem.isChecked = true
     }
 }

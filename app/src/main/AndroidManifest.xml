@@ -12,10 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RecyclerViewHistoryActivity"></activity>
-        <activity android:name=".ItemDetailsActivity" />
-        <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".FavouritesActivity"></activity>
+        <activity
+            android:name=".RecyclerViewHistoryActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ItemDetailsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

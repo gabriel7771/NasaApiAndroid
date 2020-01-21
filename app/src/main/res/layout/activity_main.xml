@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.15" />
+            app:layout_constraintVertical_bias="0.116" />
 
         <Button
             android:id="@+id/searchButton"
@@ -77,20 +77,14 @@
             app:layout_constraintTop_toBottomOf="@+id/searchEditText"
             app:layout_constraintVertical_bias="0.04" />
 
-        <Button
-            android:id="@+id/historyButton"
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/history_button_background"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:text="@string/search_history"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+            app:itemBackground="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_bottom_navigation"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

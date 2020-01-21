@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.jgba.nasaapiandroid.Database.DBHandler
 import com.jgba.nasaapiandroid.model.Item
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.history_item_view_.view.*
@@ -45,7 +46,7 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
         val dateCreated = "${item.data[0].dateCreated}"
         val description = "${item.data[0].description}"
         val imageLink = "${item.links[0].href}"
-
+        val nasaID = "${item.data[0].nasaId}" //Used to check if an item is already in favourites
         val title = "${item.data[0].title}"
         imageText.text = title
 
@@ -60,6 +61,7 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
             intent.putExtra("SecondaryCreator",secondaryCreator)
             intent.putExtra("DateCreated",dateCreated)
             intent.putExtra("Description",description)
+            intent.putExtra("NasaID",nasaID)
             context.startActivity(intent)
         }
     }
@@ -114,12 +116,22 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
         }
 
         holder.itemView.setOnClickListener{
+            //Saving on history even when searching from history
+            val mainActivity = MainActivity()
+            val h = History()
+            h.historySearch = history.historySearch
+            h.historyDate = mainActivity.getCurrentDateTime().toString()
+
+            RecyclerViewHistoryActivity.dbHandler = DBHandler(context,null,null, 1)
+            RecyclerViewHistoryActivity.dbHandler.addHistory(context,h)
+
             val intent = Intent(context, RecyclerViewActivity::class.java)
             intent.putExtra("FreeSearch",history.historySearch)
             context.startActivity(intent)
         }
     }
 
+    //Filtering with search view
     fun getFilter(): Filter {
         return historyFilter
     }

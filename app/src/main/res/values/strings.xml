@@ -22,4 +22,5 @@
     <string name="deleted_all">Deleted history</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="add_to_favourites">Add to favourites</string>
 </resources>
