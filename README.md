@@ -8,7 +8,7 @@ Selecting a single item of the results shows a new activity with item details. T
 
 <image src="images/v1_itemDetails.jpeg" width=250> <image src="images/v1_itemDescription.jpeg" width=250>
 
-The images can be saved on local storage, shared or added to favourites. When added to favourites, the item is saved in a SQLite database. Items saved on favourites can be accessed with no internet connection. The favourites list allows to filter its items.
+The images can be saved on local storage, shared and added to favourites. When added to favourites, the item is saved in a SQLite database. Items saved on favourites can be accessed with no internet connection. The favourites list allows to filter its items.
 
 <image src="images/v1_saveShare.jpeg" width=250> <image src="images/v1_favList.jpeg" width=250> <image src="images/v1_favListFilter.jpeg" width=250>
   
