@@ -1,8 +1,6 @@
 # NasaApiAndroid
 Android app that allows to search oficial images from the Nasa, using the Nasa Images API.
 
-Note: to run the source code of this app on Android Studio you may add in IDE the plugin: JSON To Kotlin Class(JsonToKotlinClass) 
-
 # Development Log
 # 1/16/2020
 Added search functionality, api connection and simple display of the results.
