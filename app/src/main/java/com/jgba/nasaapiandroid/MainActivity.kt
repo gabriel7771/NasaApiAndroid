@@ -22,6 +22,10 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        lateinit var dbHandler: DBHandler
+    }
+
     lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         val searchEditText = findViewById<ClearableEditText>(R.id.searchEditText)
         val searchButton = findViewById<Button>(R.id.searchButton)
 
+        dbHandler = DBHandler(this,null,null, 1)
+
         bottomNavigationView = findViewById(R.id.bottomNavigation)
         setIconChecked()
 
@@ -38,6 +44,8 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId){
                 R.id.searchNav -> { false }
                 R.id.favouritesNav -> {
+                    val intent = Intent(this, FavouritesActivity::class.java)
+                    startActivity(intent)
                     false
                 }
                 R.id.historyNav -> {
@@ -59,9 +67,9 @@ class MainActivity : AppCompatActivity() {
             history.historySearch = freeSearch
             history.historyDate = getCurrentDateTime().toString()
 
-            RecyclerViewHistoryActivity.dbHandler = DBHandler(this,null,null, 1)
+            dbHandler = DBHandler(this,null,null, 1)
 
-            RecyclerViewHistoryActivity.dbHandler.addHistory(this,history)
+            dbHandler.addHistory(this,history)
 
             //Opening new activity
             val intent = Intent(this, RecyclerViewActivity::class.java)

@@ -4,11 +4,7 @@
     <string name="search_edittext_hint">What do you want to search?</string>
     <string name="search_button_text">Start exploring the space!</string>
     <string name="results_of_search">Results for the search:</string>
-    <string name="tap_for_details">Tap on one item to see details</string>
-    <string name="searched">Searched:</string>
-    <string name="date">Search date:</string>
     <string name="no_searches_found">No searches found</string>
-    <string name="search_history">Search history</string>
     <string name="deleted">deleted from history</string>
     <string name="error_deleting">Error deleting</string>
     <string name="history">History</string>
@@ -23,4 +19,18 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="add_to_favourites">Add to favourites</string>
+    <string name="added_to_favourites">Added to favourites</string>
+    <string name="something_wrong">Something went wrong</string>
+    <string name="favourites">Favourites</string>
+    <string name="deleted_all_favourites">Deleted all favourites</string>
+    <string name="warning_text_3">from favourites?</string>
+    <string name="warning_text_delete_all_favourites">Do you want to delete all favourites?</string>
+    <string name="save_image">Save image</string>
+    <string name="share_image">Share image</string>
+    <string name="alert_dialog_image_title">What do you want to do?</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="saved_to">Saved to</string>
+    <string name="removed_favourite">Removed from favourites</string>
 </resources>
+

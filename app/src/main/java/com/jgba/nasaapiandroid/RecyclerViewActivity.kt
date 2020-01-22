@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.view.size
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +34,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         val freeSearch = intent.getStringExtra("FreeSearch")
 
         this.title = """${getString(R.string.results_of_search)} $freeSearch"""
-        val toolbar = findViewById(R.id.toolbar_search) as androidx.appcompat.widget.Toolbar?
+        val toolbar = findViewById(R.id.toolbar_favourite) as androidx.appcompat.widget.Toolbar?
         setSupportActionBar(toolbar)
         toolbar?.subtitle = getString(R.string.search_subtitle)
 
@@ -49,6 +48,8 @@ class RecyclerViewActivity : AppCompatActivity() {
                     startActivity(intent)
                     false }
                 R.id.favouritesNav -> {
+                    val intent = Intent(this, FavouritesActivity::class.java)
+                    startActivity(intent)
                     false
                 }
                 R.id.historyNav -> {

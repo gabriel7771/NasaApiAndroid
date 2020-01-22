@@ -82,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemBackground="@android:color/white"
+            app:itemTextColor="@color/nav_draw_item"
+            app:itemIconTint="@color/nav_draw_item"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_bottom_navigation"
             />

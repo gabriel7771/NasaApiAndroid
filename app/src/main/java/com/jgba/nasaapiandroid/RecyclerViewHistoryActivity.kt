@@ -20,15 +20,16 @@ import kotlinx.android.synthetic.main.activity_recycler_view_history.*
 
 class RecyclerViewHistoryActivity : AppCompatActivity() {
 
-    companion object {
+    /*companion object {
         lateinit var dbHandler: DBHandler
-    }
+    }*/
 
     lateinit var bottomNavigationView: BottomNavigationView
 
     var historyList = ArrayList<History>()
     lateinit var adapter: HistoryAdapter
     lateinit var recyclewView: RecyclerView
+    lateinit var dbHandler: DBHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +50,8 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
                     startActivity(intent)
                     false }
                 R.id.favouritesNav -> {
+                    val intent = Intent(this, FavouritesActivity::class.java)
+                    startActivity(intent)
                     false
                 }
                 R.id.historyNav -> {
@@ -120,7 +123,7 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
             .setTitle(context.getString(R.string.warning))
             .setMessage(context.getString(R.string.warning_text_all))
             .setPositiveButton(context.getString(R.string.yes), DialogInterface.OnClickListener { dialog, which ->
-                if (RecyclerViewHistoryActivity.dbHandler.deleteAllHistory()){
+                if (dbHandler.deleteAllHistory()){
                     dbHandler.deleteAllHistory()
                     //Refresh activity to see changes
                     recreate()
