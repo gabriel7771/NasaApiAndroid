@@ -42,11 +42,21 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
                 "$COLUMN_HISTORY_SEARCH TEXT," +
                 "$COLUMN_HISTORY_DATE TEXT)")
         db?.execSQL(CREATE_HISTORY_TABLE)
+
+        val CREATE_FAVOURITES_TABLE = ("CREATE TABLE $FAVOURITE_TABLE_NAME (" +
+                "$COLUMN_FAVOURITE_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "$COLUMN_FAVOURITE_NASAID TEXT," +
+                "$COLUMN_FAVOURITE_IMAGE_LINK TEXT," +
+                "$COLUMN_FAVOURITE_TITLE TEXT," +
+                "$COLUMN_FAVOURITE_CREATOR TEXT," +
+                "$COLUMN_FAVOURITE_DATE TEXT," +
+                "$COLUMN_FAVOURITE_DESCRIPTION TEXT)")
+        db?.execSQL(CREATE_FAVOURITES_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         if (oldVersion<2) {
-            val CREATE_FAVOURITES_TABLE = ("CREATE TABLE $FAVOURITE_TABLE_NAME (" +
+            /*val CREATE_FAVOURITES_TABLE = ("CREATE TABLE $FAVOURITE_TABLE_NAME (" +
                     "$COLUMN_FAVOURITE_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "$COLUMN_FAVOURITE_NASAID TEXT," +
                     "$COLUMN_FAVOURITE_IMAGE_LINK TEXT," +
@@ -54,7 +64,7 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
                     "$COLUMN_FAVOURITE_CREATOR TEXT," +
                     "$COLUMN_FAVOURITE_DATE TEXT," +
                     "$COLUMN_FAVOURITE_DESCRIPTION TEXT)")
-            db?.execSQL(CREATE_FAVOURITES_TABLE)
+            db?.execSQL(CREATE_FAVOURITES_TABLE)*/
         }
     }
 
@@ -135,7 +145,6 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
             Toast.makeText(context, context.getString(R.string.no_searches_found),Toast.LENGTH_SHORT).show()
         }
         else{
-            if (cursor.moveToFirst()) {
                 while (cursor.moveToNext()) {
                     val favourites = Favourites()
 
@@ -157,7 +166,6 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
                     favouritesList.add(favourites)
                     favouritesList.reverse()
                 }
-            }
         }
         cursor.close()
         db.close()
