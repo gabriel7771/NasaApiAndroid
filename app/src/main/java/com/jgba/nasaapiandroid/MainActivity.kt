@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         val searchEditText = findViewById<ClearableEditText>(R.id.searchEditText)
         val searchButton = findViewById<Button>(R.id.searchButton)
 
-        dbHandler = DBHandler(this,null,null, 1)
+        dbHandler = DBHandler(this,null,null, 2)
 
         bottomNavigationView = findViewById(R.id.bottomNavigation)
         setIconChecked()

@@ -9,11 +9,15 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.Html
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.URLUtil
@@ -22,6 +26,7 @@ import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.view.drawToBitmap
 import androidx.core.view.size
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -46,7 +51,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details)
 
-        dbHandler = DBHandler(this,null,null, 1)
+        dbHandler = DBHandler(this,null,null, 2)
 
         bottomNavigationView = findViewById(R.id.bottomNavigation)
         setIconChecked()
@@ -76,14 +81,20 @@ class ItemDetailsActivity : AppCompatActivity() {
         val title = intent.getStringExtra("Title")
         val secondaryCreator = intent.getStringExtra("SecondaryCreator")
         val dateCreated = intent.getStringExtra("DateCreated")
-        val description = intent.getStringExtra("Description")
+        var description = intent.getStringExtra("Description")
         val nasaID = intent.getStringExtra("NasaID")
+
 
         Picasso.get().load(imageLink).into(imageView)
         titleText.text = "$title"
         secondaryCreatorText.text = "$secondaryCreator"
         dateText.text = "$dateCreated"
-        descriptionText.text = Html.fromHtml("$description") //Support html tags on textview text
+        //descriptionText.text = Html.fromHtml("$description") //Support html tags on textview text (deprecated)
+
+        //Support html tags and make links clickable (taking care about api version)
+        val descriptionHTML: Spanned  = fromHtml(description)
+        descriptionText.text = descriptionHTML
+        descriptionText.movementMethod = LinkMovementMethod.getInstance()
 
         if(dbHandler.checkIfExistsInDB(FAVOURITE_TABLE_NAME, COLUMN_FAVOURITE_NASAID, nasaID)){
             addFavouriteButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_star_yellow_24dp,0 )
@@ -268,4 +279,15 @@ class ItemDetailsActivity : AppCompatActivity() {
             }
         }
     }
-}
+    @SuppressWarnings("deprecation")
+    fun fromHtml(html: String): Spanned{
+            if (html == null) {
+                return SpannableString ("")
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                return Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                return Html.fromHtml(html)
+            }
+        }
+    }
+
