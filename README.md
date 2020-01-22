@@ -1,6 +1,27 @@
 # NasaApiAndroid
 Android app that allows to search oficial images from the Nasa, using the Nasa Images API.
 
+<image src="images/v1_mainActivity.jpeg" width=250>
+  
+Has a search field where searches can be made based on keywords. The results are shown in a recycler view.
+
+<image src="images/v1_mainActivity2.jpeg" width=250> <image src="images/v1_searchResult.jpeg" width=250>
+
+Selecting a single item of the results shows a new activity with item details. The item description may contain official Nasa links.
+
+<image src="images/v1_itemDetails.jpeg" width=250> <image src="images/v1_itemDescription.jpeg" width=250>
+
+The images can be saved on local storage, shared or added to favourites. When added to favourites, the item is saved in a SQLite database.
+
+<image src="images/v1_saveShare.jpeg" width=250> 
+  
+Items saved on favourites can be accessed with no internet connection. The favourites list allows to filter its items.
+
+<image src="images/v1_favList.jpeg" width=250> <image src="images/v1_favFilter.jpeg" width=250>
+
+
+
+
 # Development Log
 # 1/16/2020
 Added search functionality, api connection and simple display of the results.
