@@ -35,6 +35,23 @@ Added delete by item and delete all in history.
 Added search view and selectable items to history.
 
 <image src="images/day4_history.jpeg" width=250> <image src="images/day4_searchHistory.jpeg" width=250>
+  
+# 1/21/2020
+UI improved.
+
+<image src="images/day5_mainActivity.jpeg" width=250>
+  
+Added favourites list. Items now can be added to favourites. 
+ 
+<image src="images/day5_favourites.jpeg" width=250> <image src="images/day5_itemDetails.jpeg" width=250>
+
+Images on item details now can be saved or shared when long pressed on them.
+
+<image src="images/day5_shareSave.jpeg" width=250>
+
+
+
+
 
 
 
