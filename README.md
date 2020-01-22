@@ -36,7 +36,7 @@ Added search view and selectable items to history.
 
 <image src="images/day4_history.jpeg" width=250> <image src="images/day4_searchHistory.jpeg" width=250>
   
-# 1/19/2020
+# 1/21/2020
 UI improved.
 
 <image src="images/day5_mainActivity.jpeg" width=250>
