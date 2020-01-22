@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.URLUtil
@@ -82,7 +83,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         titleText.text = "$title"
         secondaryCreatorText.text = "$secondaryCreator"
         dateText.text = "$dateCreated"
-        descriptionText.text = "$description"
+        descriptionText.text = Html.fromHtml("$description") //Support html tags on textview text
 
         if(dbHandler.checkIfExistsInDB(FAVOURITE_TABLE_NAME, COLUMN_FAVOURITE_NASAID, nasaID)){
             addFavouriteButton.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_star_yellow_24dp,0 )
@@ -219,6 +220,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     private fun requestStoragePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
         {
+            //If want to add a custom alert dialog before the permission request
            /*
             AlertDialog.Builder(this)
                 .setTitle(resources.getString(R.string.permission_needed))
