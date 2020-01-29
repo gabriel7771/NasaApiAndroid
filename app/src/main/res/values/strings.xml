@@ -32,5 +32,6 @@
     <string name="permission_denied">Permission denied</string>
     <string name="saved_to">Saved to</string>
     <string name="removed_favourite">Removed from favourites</string>
+    <string name="no_internet">Unable to load page. Please check your internet connection and retry.</string>
 </resources>
 
