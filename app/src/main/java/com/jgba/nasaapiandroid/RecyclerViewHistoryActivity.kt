@@ -28,7 +28,7 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
 
     var historyList = ArrayList<History>()
     lateinit var adapter: HistoryAdapter
-    lateinit var recyclewView: RecyclerView
+    lateinit var recyclerView: RecyclerView
     lateinit var dbHandler: DBHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,12 +65,12 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
         dbHandler = DBHandler(this,null,null, 1)
 
         historyList = java.util.ArrayList<History>()
-        recyclewView = findViewById(R.id.recycler_view_history)
+        //recyclerView = findViewById(R.id.recycler_view_history)
 
         viewHistory()
 
-        adapter = HistoryAdapter(this, historyList)
-        recyclewView.adapter = adapter
+        //adapter = HistoryAdapter(this, historyList)
+        //recyclewView.adapter = adapter
     }
     //TOOLBAR
     override fun onCreateOptionsMenu (menu: Menu): Boolean{
@@ -103,11 +103,12 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
     }
 
     private fun viewHistory(){
+
         historyList = dbHandler.getHistory(this)
         adapter = HistoryAdapter(this, historyList)
-        recyclewView = findViewById(R.id.recycler_view_history)
-        recyclewView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false) as RecyclerView.LayoutManager
-        recyclewView.adapter = adapter
+        recyclerView = findViewById(R.id.recycler_view_history)
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false) as RecyclerView.LayoutManager
+        recyclerView.adapter = adapter
     }
 
     override fun onResume() {

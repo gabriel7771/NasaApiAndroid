@@ -84,8 +84,8 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
                 history.historySearch = cursor.getString(cursor.getColumnIndex(COLUMN_HISTORY_SEARCH))
                 history.historyDate = cursor.getString(cursor.getColumnIndex(COLUMN_HISTORY_DATE))
                 historyList.add(history)
-                historyList.reverse() //Used reverse method to show history from first to last search
             }
+            historyList.reverse() //Used reverse method to show history from first to last search
         }
         cursor.close()
         db.close()
@@ -164,8 +164,8 @@ class DBHandler (context: Context, name: String?, factory: SQLiteDatabase.Cursor
                         cursor.getString(cursor.getColumnIndex(COLUMN_FAVOURITE_DESCRIPTION))
 
                     favouritesList.add(favourites)
-                    favouritesList.reverse()
                 }
+            favouritesList.reverse()
         }
         cursor.close()
         db.close()

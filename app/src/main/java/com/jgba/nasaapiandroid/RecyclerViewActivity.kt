@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.size
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +23,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jgba.nasaapiandroid.model.Item
 import com.jgba.nasaapiandroid.model.ModelJSON
 import kotlinx.android.synthetic.main.activity_recycler_view.*
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class RecyclerViewActivity : AppCompatActivity() {
 
     private val itemList: MutableList<Item> = mutableListOf()
+    private val mainActivity: MainActivity = MainActivity()
 
     private lateinit var myAdapter: SearchAdapter
 
@@ -33,6 +44,7 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     lateinit var freeSearch: String
     private var loaded = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +115,34 @@ class RecyclerViewActivity : AppCompatActivity() {
             })
 */
     }
+    //TOOLBAR
+    override fun onCreateOptionsMenu (menu: Menu): Boolean{
+        menuInflater.inflate(R.menu.menu_toolbar_search,menu)
+
+        //Search filter
+        val searchItem = menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.imeOptions = EditorInfo.IME_ACTION_SEARCH
+        searchView.inputType = EditorInfo.TYPE_TEXT_FLAG_CAP_WORDS
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                //Toast.makeText(applicationContext,query,Toast.LENGTH_SHORT).show()
+                intent.putExtra("FreeSearch",query)
+                mainActivity.addHistoryToDatabase(query, mainActivity.getCurrentDateTime())
+                httpRequest()
+                recreate()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                return false
+            }
+        })
+        return true
+    }
     override fun onResume() {
         super.onResume()
         setIconChecked()
@@ -136,13 +176,7 @@ class RecyclerViewActivity : AppCompatActivity() {
     }
     private fun setIconChecked(){
         val menu: Menu = bottomNavigationView.menu
-        var menuItem: MenuItem
-        var i=0
-        while (i<menu.size){
-            menuItem = menu.getItem(i)
-            menuItem.isChecked = false
-            menuItem.isCheckable = false
-            i++
-        }
+        val menuItem: MenuItem = menu.getItem(0)
+        menuItem.isChecked = true
     }
 }
