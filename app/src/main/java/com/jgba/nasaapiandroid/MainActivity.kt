@@ -19,6 +19,15 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import android.view.inputmethod.EditorInfo
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.KeyEvent
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val searchEditText = findViewById<ClearableEditText>(R.id.searchEditText)
         val searchButton = findViewById<Button>(R.id.searchButton)
 
-        dbHandler = DBHandler(this,null,null, 2)
+        dbHandler = DBHandler(this,null,null, 1)
 
         bottomNavigationView = findViewById(R.id.bottomNavigation)
         setIconChecked()
@@ -59,24 +68,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         searchButton.setOnClickListener{
-            //freeSearch is the keyword to input in the http request of the NASA API
-            val freeSearch = searchEditText.text.toString()
-
-            //Adding data to the history database
-            val history = History()
-            history.historySearch = freeSearch
-            history.historyDate = getCurrentDateTime().toString()
-
-            dbHandler = DBHandler(this,null,null, 1)
-
-            dbHandler.addHistory(this,history)
-
-            //Opening new activity
-            val intent = Intent(this, RecyclerViewActivity::class.java)
-            //Send the keyword to the RecyclerViewActivity
-            intent.putExtra("FreeSearch",freeSearch)
-            startActivity(intent)
+            onStartSearch()
         }
+
+        searchEditText.setOnEditorActionListener { _, actionId, event ->
+            if (event != null && event!!.keyCode === KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
+                onStartSearch()
+            }
+            false
+        }
+    }
+    fun onStartSearch(){
+        //freeSearch is the keyword to input in the http request of the NASA API
+        val freeSearch = searchEditText.text.toString()
+
+        //Adding data to the history database
+        addHistoryToDatabase(freeSearch, getCurrentDateTime())
+
+        //Opening new activity
+        val intent = Intent(this, RecyclerViewActivity::class.java)
+        //Send the keyword to the RecyclerViewActivity
+        intent.putExtra("FreeSearch",freeSearch)
+        startActivity(intent)
+    }
+    fun addHistoryToDatabase(search: String, date: Date){
+        val history = History()
+        history.historySearch = search
+        history.historyDate = date.toString()
+
+        //dbHandler = DBHandler(this,null,null, 1)
+
+        dbHandler.addHistory(this,history)
     }
     override fun onResume() {
         super.onResume()

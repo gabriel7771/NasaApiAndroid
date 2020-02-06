@@ -54,6 +54,7 @@
             android:inputType="textCapWords"
             android:padding="2dp"
             android:textSize="22sp"
+            android:imeOptions="actionSearch"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
