@@ -59,7 +59,7 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
         Picasso.get().load(imageLink).into(nasaImage)
 
         holder.itemView.setOnClickListener{
-
+            val searchActivity = RecyclerViewActivity()
             val intent = Intent(context, ItemDetailsActivity::class.java)
             //Sending detailed info
             intent.putExtra("ImageLink", imageLink)
@@ -69,6 +69,7 @@ class SearchAdapter(context: Context, private val itemList: MutableList<Item>) :
             intent.putExtra("Description",description)
             intent.putExtra("NasaID",nasaID)
             context.startActivity(intent)
+            searchActivity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
         }
     }
 }
@@ -125,6 +126,7 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
             //Saving on history even when searching from history
             val mainActivity = MainActivity()
             val h = History()
+            val historyActivity = RecyclerViewHistoryActivity()
             h.historySearch = history.historySearch
             h.historyDate = mainActivity.getCurrentDateTime().toString()
 
@@ -133,7 +135,10 @@ class HistoryAdapter(context: Context, val historyList: ArrayList<History>): Rec
 
             val intent = Intent(context, RecyclerViewActivity::class.java)
             intent.putExtra("FreeSearch",history.historySearch)
+            //context.startActivity(intent)
             context.startActivity(intent)
+            historyActivity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            //finish()
         }
     }
 

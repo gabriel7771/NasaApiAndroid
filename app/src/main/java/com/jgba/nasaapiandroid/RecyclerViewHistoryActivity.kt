@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jgba.nasaapiandroid.Database.DBHandler
+import com.jgba.nasaapiandroid.Graphics.Graphics
 import kotlinx.android.synthetic.main.activity_recycler_view_history.*
 
 class RecyclerViewHistoryActivity : AppCompatActivity() {
@@ -48,10 +49,15 @@ class RecyclerViewHistoryActivity : AppCompatActivity() {
                 R.id.searchNav -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    false }
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
+                    false
+                }
                 R.id.favouritesNav -> {
                     val intent = Intent(this, FavouritesActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
                     false
                 }
                 R.id.historyNav -> {

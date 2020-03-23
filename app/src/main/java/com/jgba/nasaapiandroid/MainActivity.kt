@@ -27,6 +27,7 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.KeyEvent
+import com.jgba.nasaapiandroid.Graphics.Graphics
 
 
 class MainActivity : AppCompatActivity() {
@@ -55,11 +56,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.favouritesNav -> {
                     val intent = Intent(this, FavouritesActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    //finish()
                     false
                 }
                 R.id.historyNav -> {
                     val intent = Intent(this, RecyclerViewHistoryActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    //finish()
                     false
                 }
                 else -> false

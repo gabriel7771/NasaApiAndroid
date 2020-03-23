@@ -33,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jgba.nasaapiandroid.Database.DBHandler
 import com.jgba.nasaapiandroid.Database.DBHandler.Companion.COLUMN_FAVOURITE_NASAID
 import com.jgba.nasaapiandroid.Database.DBHandler.Companion.FAVOURITE_TABLE_NAME
+import com.jgba.nasaapiandroid.Graphics.Graphics
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_item_details.*
 import java.io.ByteArrayOutputStream
@@ -47,6 +48,8 @@ class ItemDetailsActivity : AppCompatActivity() {
     lateinit var dbHandler: DBHandler
 
     var STORAGE_PERMISSION_CODE = 1
+
+    var action: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_details)
@@ -61,15 +64,22 @@ class ItemDetailsActivity : AppCompatActivity() {
                 R.id.searchNav -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    false }
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
+                    false
+                }
                 R.id.favouritesNav -> {
                     val intent = Intent(this, FavouritesActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
                     false
                 }
                 R.id.historyNav -> {
                     val intent = Intent(this, RecyclerViewHistoryActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
                     false
                 }
                 else -> false
@@ -194,6 +204,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         builder.show()
     }
     private fun saveImage(){
+        action = "save"
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
         {
             val bitmap = (imageView.getDrawable() as BitmapDrawable).bitmap
@@ -210,6 +221,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         }
     }
     private fun shareImage(){
+        action = "share"
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             val bitmap = (imageView.drawable as BitmapDrawable).bitmap
             val share = Intent(Intent.ACTION_SEND)
@@ -251,6 +263,8 @@ class ItemDetailsActivity : AppCompatActivity() {
                 this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 STORAGE_PERMISSION_CODE
+
+
             )
         }
         else {
@@ -261,6 +275,7 @@ class ItemDetailsActivity : AppCompatActivity() {
             )
         }
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == STORAGE_PERMISSION_CODE) {
@@ -270,6 +285,12 @@ class ItemDetailsActivity : AppCompatActivity() {
                     resources.getString(R.string.permission_granted),
                     Toast.LENGTH_SHORT
                 ).show()
+                if (action.equals("save")){
+                    saveImage()
+                }
+                else{
+                    shareImage()
+                }
             } else {
                 Toast.makeText(
                     this,

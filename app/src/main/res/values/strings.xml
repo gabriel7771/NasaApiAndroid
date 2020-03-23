@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nasa Image Browser</string>
+    <string name="app_name">NASA Image Browser</string>
 
     <string name="search_edittext_hint">What do you want to search?</string>
     <string name="search_button_text">Start exploring the space!</string>

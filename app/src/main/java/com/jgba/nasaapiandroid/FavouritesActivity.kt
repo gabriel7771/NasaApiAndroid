@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jgba.nasaapiandroid.Database.DBHandler
+import com.jgba.nasaapiandroid.Graphics.Graphics
 
 class FavouritesActivity : AppCompatActivity() {
 
@@ -41,13 +42,18 @@ class FavouritesActivity : AppCompatActivity() {
                 R.id.searchNav -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    false }
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
+                    false
+                }
                 R.id.favouritesNav -> {
                     false
                 }
                 R.id.historyNav -> {
                     val intent = Intent(this, RecyclerViewHistoryActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+                    finish()
                     false
                 }
                 else -> false

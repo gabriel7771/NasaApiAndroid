@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FavouritesActivity"></activity>
+        <activity android:name=".FavouritesActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".RecyclerViewHistoryActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -32,6 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Graphics.Graphics" />
     </application>
 
 </manifest>
